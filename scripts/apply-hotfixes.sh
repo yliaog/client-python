@@ -28,7 +28,7 @@ fi
 # UPDATE: The commit being cherry-picked is updated since the the client generated in 1adaaecd0879d7315f48259ad8d6cbd66b835385
 # differs from the initial hotfix
 # Ref: https://github.com/kubernetes-client/python/pull/995/commits/9959273625b999ae9a8f0679c4def2ee7d699ede
-git cherry-pick -n 88397bcc5b3b348a41dbf641367756b86552d362
+# git cherry-pick -n 88397bcc5b3b348a41dbf641367756b86552d362
 if [ $? -eq 0 ]
 then
     echo Successfully patched changes for custom client behavior
@@ -67,7 +67,7 @@ fi;
 # Patching commit for no_proxy support
 # UPDATE: The commit being cherry-picked is updated kubernetes/client/ unless OpenAPI generator v5.3.1 involved (offinical support of no_proxy feature).
 # Ref: https://github.com/kubernetes-client/python/pull/1579/commits/95a893cd1c34de11a4e3893dd1dfde4a0ca30bdc and conversations in the PR.
-git cherry-pick -n 95a893cd1c34de11a4e3893dd1dfde4a0ca30bdc
+# git cherry-pick -n 95a893cd1c34de11a4e3893dd1dfde4a0ca30bdc
 if [ $? -eq 0 ]
 then
     echo Successfully patched changes for no_proxy support
