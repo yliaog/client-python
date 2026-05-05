@@ -9,6 +9,7 @@ import kubernetes
 from kubernetes.client.configuration import Configuration
 import urllib3
 
+
 class TestApiClient(unittest.TestCase):
 
     def test_context_manager_closes_threadpool(self):
