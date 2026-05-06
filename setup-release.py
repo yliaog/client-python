@@ -72,6 +72,7 @@ setup(
               'kubernetes.utils', 'kubernetes.client.apis',
               'kubernetes.dynamic', 'kubernetes.leaderelection',
               'kubernetes.leaderelection.resourcelock',
+              'kubernetes.informer',
               'kubernetes_asyncio',
               'kubernetes_asyncio.config',
               'kubernetes_asyncio.client',
