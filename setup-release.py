@@ -47,6 +47,13 @@ with open('requirements.txt') as f:
 with open('test-requirements.txt') as f:
     TESTS_REQUIRES = f.readlines()
 
+with open('requirements-asyncio.txt') as f:
+    REQUIRES_ASYNCIO = f.readlines()
+
+with open('test-requirements-asyncio.txt') as f:
+    TESTS_REQUIRES_ASYNCIO = f.readlines()
+
+
 setup(
     name=PACKAGE_NAME,
     version=CLIENT_VERSION,
@@ -56,15 +63,21 @@ setup(
     license="Apache License Version 2.0",
     url="https://github.com/kubernetes-client/python",
     keywords=["Swagger", "OpenAPI", "Kubernetes"],
-    install_requires=REQUIRES,
-    tests_require=TESTS_REQUIRES,
+    install_requires=REQUIRES+REQUIRES_ASYNCIO,
+    tests_require=TESTS_REQUIRES+TESTS_REQUIRES_ASYNCIO,
     extras_require=EXTRAS,
     packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
               'kubernetes.watch', 'kubernetes.client.api',
               'kubernetes.stream', 'kubernetes.client.models',
               'kubernetes.utils', 'kubernetes.client.apis',
               'kubernetes.dynamic', 'kubernetes.leaderelection',
-              'kubernetes.leaderelection.resourcelock'],
+              'kubernetes.leaderelection.resourcelock',
+              'kubernetes_asyncio',
+              'kubernetes_asyncio.config',
+              'kubernetes_asyncio.client',
+              'kubernetes_asyncio.client.api',
+              'kubernetes_asyncio.client.models'
+              ],
     include_package_data=True,
     long_description="Python client for kubernetes http://kubernetes.io/",
     python_requires='>=3.10',
