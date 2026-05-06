@@ -1,4 +1,4 @@
-# Copyright 2026 The Kubernetes Authors.
+# Copyright 2016 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,43 +16,71 @@ from setuptools import setup
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
-CLIENT_VERSION = "36.0.0a1"
-PACKAGE_NAME = "kubernetes_asyncio"
+CLIENT_VERSION = "36.0.0+snapshot"
+PACKAGE_NAME = "kubernetes"
 DEVELOPMENT_STATUS = "3 - Alpha"
 
 # To install the library, run the following
 #
-# python setup-asyncio.py install
+# python setup.py install
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
+EXTRAS = {
+    'google-auth': ['google-auth>=1.0.1']
+}
+REQUIRES = []
+with open('requirements.txt') as f:
+    for line in f:
+        line, _, _ = line.partition('#')
+        line = line.strip()
+        if not line or line.startswith('setuptools'):
+            continue
+        elif ';' in line:
+            requirement, _, specifier = line.partition(';')
+            for_specifier = EXTRAS.setdefault(':{}'.format(specifier), [])
+            for_specifier.append(requirement)
+        else:
+            REQUIRES.append(line)
+
+with open('test-requirements.txt') as f:
+    TESTS_REQUIRES = f.readlines()
+
 with open('requirements-asyncio.txt') as f:
-    REQUIRES = f.readlines()
+    REQUIRES_ASYNCIO = f.readlines()
 
 with open('test-requirements-asyncio.txt') as f:
-    TESTS_REQUIRES = f.readlines()
+    TESTS_REQUIRES_ASYNCIO = f.readlines()
+
 
 setup(
     name=PACKAGE_NAME,
     version=CLIENT_VERSION,
-    description="Kubernetes asynchronous python client",
+    description="Kubernetes python client",
     author_email="",
     author="Kubernetes",
     license="Apache License Version 2.0",
-    url="https://github.com/kubernetes-client/kubernetes_asyncio",
+    url="https://github.com/kubernetes-client/python",
     keywords=["Swagger", "OpenAPI", "Kubernetes"],
-    install_requires=REQUIRES,
-    python_requires=">=3.10",
-    tests_require=TESTS_REQUIRES,
-    packages=[
-        'kubernetes_asyncio',
-        'kubernetes_asyncio.config',
-        'kubernetes_asyncio.client',
-        'kubernetes_asyncio.client.api',
-        'kubernetes_asyncio.client.models'],
+    install_requires=REQUIRES+REQUIRES_ASYNCIO,
+    tests_require=TESTS_REQUIRES+TESTS_REQUIRES_ASYNCIO,
+    extras_require=EXTRAS,
+    packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
+              'kubernetes.watch', 'kubernetes.client.api',
+              'kubernetes.stream', 'kubernetes.client.models',
+              'kubernetes.utils', 'kubernetes.client.apis',
+              'kubernetes.dynamic', 'kubernetes.leaderelection',
+              'kubernetes.leaderelection.resourcelock',
+              'kubernetes_asyncio',
+              'kubernetes_asyncio.config',
+              'kubernetes_asyncio.client',
+              'kubernetes_asyncio.client.api',
+              'kubernetes_asyncio.client.models'
+              ],
     include_package_data=True,
-    long_description="Python asynchronous client for kubernetes http://kubernetes.io/",
+    long_description="Python client for kubernetes http://kubernetes.io/",
+    python_requires='>=3.10',
     classifiers=[
         "Development Status :: %s" % DEVELOPMENT_STATUS,
         "Topic :: Utilities",

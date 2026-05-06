@@ -67,7 +67,7 @@ setup(
               'kubernetes.leaderelection.resourcelock'],
     include_package_data=True,
     long_description="Python client for kubernetes http://kubernetes.io/",
-    python_requires='>=3.6',
+    python_requires='>=3.10',
     classifiers=[
         "Development Status :: %s" % DEVELOPMENT_STATUS,
         "Topic :: Utilities",
@@ -77,8 +77,6 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
