@@ -16,7 +16,7 @@ from setuptools import setup
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
-CLIENT_VERSION = "36.0.0+snapshot"
+CLIENT_VERSION = "36.0.0a3"
 PACKAGE_NAME = "kubernetes"
 DEVELOPMENT_STATUS = "3 - Alpha"
 
@@ -72,6 +72,7 @@ setup(
               'kubernetes.utils', 'kubernetes.client.apis',
               'kubernetes.dynamic', 'kubernetes.leaderelection',
               'kubernetes.leaderelection.resourcelock',
+              'kubernetes.informer',
               'kubernetes_asyncio',
               'kubernetes_asyncio.config',
               'kubernetes_asyncio.client',
