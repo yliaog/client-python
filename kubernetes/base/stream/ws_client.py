@@ -73,6 +73,13 @@ class WSClient:
             self._all = _IgnoredIO()
         self.sock = create_websocket(configuration, url, headers)
         self.subprotocol = getattr(self.sock, 'subprotocol', None)
+        if not self.subprotocol and self.sock:
+            headers_dict = self.sock.getheaders()
+            if headers_dict:
+                for k, v in headers_dict.items():
+                    if k.lower() == 'sec-websocket-protocol':
+                        self.subprotocol = v
+                        break
         self._connected = True
         self._returncode = None
 
