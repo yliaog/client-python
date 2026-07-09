@@ -1,3 +1,19 @@
+# v36.0.3
+
+Kubernetes API Version: v1.36.2
+
+### Uncategorized
+- Restored backward compatibility for `Configuration.auth_settings()`:
+  the legacy `api_key['authorization']` lookup is honored as a fallback
+  when `api_key['BearerToken']` is not set, fixing 401 Unauthorized
+  regressions seen after upgrading to v36.0.0 (#2595). (#2604, @GK-07)
+
+### Bug or Regression
+- Fix `load_incluster_config()` and `load_kube_config()` (sync and async, with a static token) so requests carry an `Authorization` header on `kubernetes-client/python` v36+. Without this fix, in-cluster pods upgrading to v36 silently send unauthenticated requests and the apiserver rejects them as `system:anonymous`. (#2585, @jmacek)
+
+### Deprecation
+- Support new exec v5 websocket subprotocol (#2486, @aojea)
+
 # v36.0.2
 
 Kubernetes API Version: v1.36.1
